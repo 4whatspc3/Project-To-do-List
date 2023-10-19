@@ -1,0 +1,3 @@
+function component() {
+    //code here
+}
