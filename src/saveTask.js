@@ -1,9 +1,6 @@
-const saveToDo = (toDoItem, ...args) => {
-    const toDoList = [];
+const saveToDo = (...args) => {
 
-    toDoList.push(toDoItem, ...args);
-
-    return {toDoList}
+    return Object.assign({}, {...args})
 }
 
 export default saveToDo;
