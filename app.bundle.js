@@ -1,1 +1,0 @@
-(()=>{"use strict";const o=(o,t,e,c,s,n)=>({title:o,description:t,dueDate:e,priority:c,notes:s,check:n}),t=o("1","2","3","4","5","6"),e=o("a","b","c","d","e","f");console.log(t.check);const c=((o,...t)=>{const e=[];return e.push(o,...t),{toDoList:e}})(t,e);console.log(c);for(let o in t)console.log(t[o])})();
