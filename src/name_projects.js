@@ -1,16 +1,18 @@
 const nameProjects = (title) => {
-    const content = document.createElement('div');
-    content.classList.add('content');
+    const projBlock = document.createElement('div');
+    projBlock.classList.add('projBlock');
+    projBlock.style.border = '1px solid orange';
 
     const contentImage = document.createElement('img');
     //contentImage.setAttribute('src', image);
 
-    const projTitle = document.createElement('p');
+    const projTitle = document.createElement('button');
+    projTitle.classList.add('btnTitle');
     projTitle.textContent = title;
 
-    content.append(contentImage, projTitle);
+    projBlock.append(contentImage, projTitle);
 
-    return {content}
+    return {projBlock}
 }
 
 export default nameProjects;

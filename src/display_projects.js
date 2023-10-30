@@ -1,6 +1,7 @@
 const displayProjects = () => {       
     const projContainer = document.createElement('div');
     projContainer.classList.add('projContainer');
+    projContainer.style.border = "1px solid blue";
     
     const projHeader = document.createElement('div');
     projHeader.classList.add('projHeader');
@@ -11,6 +12,7 @@ const displayProjects = () => {
 
     const projBody = document.createElement('div');
     projBody.classList.add('projBody');
+    projBody.style.border = '1px solid red';
 
     projContainer.append(projHeader, projBody);
 
