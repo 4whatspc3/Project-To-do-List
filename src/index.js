@@ -1,65 +1,103 @@
-import infoToDo from './info_to_do';
+import moldPage from './DOM_components/mold_page';
 
-import saveToDo from './save_to_do';
+import displayToDos from './DOM_components/display_to_do';
 
-import displayToDos from './display_to_do';
+import displayProjects from './DOM_components/display_projects';
 
-import displayProjects from './display_projects';
+import nameProjects from './DOM_components/name_projects';
 
-import nameProjects from './name_projects';
+import buttonHome from './DOM_components/button_home';
 
-const test = displayProjects();
+import buttonCounters from './LOGIC_components/button_counters';
 
-const container = document.createElement('div');
-container.classList.add('container');
-container.style.border = '1px solid blue';
+import infoToDo from './LOGIC_components/info_to_do';
 
-const content = document.createElement('div');
-content.classList.add('content');
-container.style.border = '1px solid pink';
+import saveToDo from './LOGIC_components/save_to_do';
 
+const component = () => {
+    const {container, content, btn} = moldPage();
 
-const btn = document.createElement('button');
-btn.classList.add('btnHome');
-btn.textContent = 'click me';
+    const {projContainer} = displayProjects();
 
-container.append(btn, test.projContainer, content);
+    const {toDoContainer, containerNumber} = displayToDos();
 
-document.body.append(container);
+    const {getTitle, passNumber} = buttonHome();
 
-//=============================================================
+    return {container, content, btn, projContainer, toDoContainer, containerNumber, getTitle, passNumber}
+}
+
+const page = component();
+
+page.container.append(page.btn, page.projContainer, page.content);
+
+page.content.append(page.toDoContainer);
+
+page.containerNumber('home');
+
+document.body.append(page.container);
+
+const counters = buttonCounters();
+
+function empty(element) {
+    element.replaceChildren(); 
+}
 
 const manipulateContainer = document.querySelector('.container');
 
 manipulateContainer.addEventListener('click', (e) => {
+    //add projects
     if(e.target.matches('.btnHome')){
-        //add projects
-        const placeProjects = document.querySelector('.projBody');
-    
-        let title = prompt('test');
-    
-        const name = nameProjects(title);
-    
-        placeProjects.append(name.projBlock);
-    
-        console.log(title);
-    }
-
-    if(e.target.matches('.btnTitle')){
-        //append a place do display the to-do items
-        const cont = document.querySelector('.content');
+        const newProj = nameProjects();
         
-        const testToDo = displayToDos();
+        newProj.passTitle(page.getTitle());
 
-        cont.append(testToDo.toDoContainer);
+        const save = saveToDo();
 
-        console.log('carcosa');
+        counters.listOfsaves.push(save);
+
+        const display = displayToDos();
+
+        counters.listOfDisplays.push(display);
+
+        const placeProjects = document.querySelector('.projBody');
+        
+        placeProjects.append(newProj.projBlock);
+
+        page.passNumber('btnTitle', counters.j)
+    }
+    
+    //add a place to display the to-do items
+    if(e.target.matches('.btnTitle')){
+        
+        let reference = e.target.dataset.projNum;
+
+        const manipulateContent = document.querySelector('.content');
+
+        empty(manipulateContent);
+
+        manipulateContent.append(counters.listOfDisplays[reference].toDoContainer)
+
+        counters.listOfDisplays[reference].containerNumber(reference);
     }
 
     if(e.target.matches('.btnToDo')){
-        //add the to-do items
-        const whereToDos = document.querySelector('.placeToDos');
-    
+        let reference = e.target.parentNode.dataset.displayNum;
+        let lengthReference = Object.keys(counters.listOfsaves[reference].fillSave).length;
+
+        if(lengthReference > 0){
+            
+            if(lengthReference === 1) {
+                counters.k = 1;
+            } else {
+                counters.k = lengthReference;
+            }
+            
+        } else {
+            counters.k = 0;
+        }
+
+        const provisorySave = counters.listOfsaves[reference].fillSave;
+        
         let title = prompt('test'),
         description = prompt('test'),
         dueDate = prompt('test'),
@@ -67,10 +105,19 @@ manipulateContainer.addEventListener('click', (e) => {
         notes = prompt('test'),
         check = prompt('test');
 
-        const final = infoToDo(title, description, dueDate, priority, notes, check);
+        const info = infoToDo(title, description, dueDate, priority, notes, check);
 
-        whereToDos.append(final.getAllInfo());
+        provisorySave[counters.k] = info;
 
-        console.log(final);
+        counters.listOfsaves[reference].fillSave = provisorySave;
+
+        const whereToDos = document.querySelector('.placeToDos');
+        
+        empty(whereToDos);
+
+        for (let key in provisorySave){
+            whereToDos.append(provisorySave[key].getAllInfo());
+        }
     }
+    counters.j = 0;
 })
