@@ -116,8 +116,30 @@ manipulateContainer.addEventListener('click', (e) => {
         empty(whereToDos);
 
         for (let key in provisorySave){
-            whereToDos.append(provisorySave[key].getAllInfo());
+            whereToDos.append(provisorySave[key].getAllInfo(key));
         }
+    }
+
+    if(e.target.matches('.del')){
+        const toDoContainer = document.querySelector('.toDoContainer');
+
+        let displayRef = toDoContainer.dataset.displayNum;
+        console.log(displayRef)
+        
+        const facilitus = counters.listOfsaves[displayRef].fillSave;
+        console.log(facilitus);
+
+        console.log('congo')
+
+        let itemRef = e.target.parentNode.dataset.todoNum;
+        console.log(facilitus[itemRef])
+
+        delete facilitus[itemRef];
+
+        e.target.parentNode.remove();
+
+        console.log(facilitus)
     }
     counters.j = 0;
 })
+
