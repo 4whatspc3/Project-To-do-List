@@ -140,6 +140,49 @@ manipulateContainer.addEventListener('click', (e) => {
 
         console.log(facilitus)
     }
+
+    if(e.target.matches('.upt')){
+        console.log('ola')
+
+        const toDoContainer = document.querySelector('.toDoContainer');
+
+        let displayRef = toDoContainer.dataset.displayNum;
+        console.log(displayRef)
+        
+        const facilitus = counters.listOfsaves[displayRef].fillSave;
+        console.log(facilitus);
+
+        console.log('congo')
+
+        let itemRef = e.target.parentNode.dataset.todoNum;
+        console.log(facilitus[itemRef])
+
+        console.log('CONGO2')
+
+        let title = prompt('test'),
+        description = prompt('test'),
+        dueDate = prompt('test'),
+        priority = prompt('test'),
+        notes = prompt('test'),
+        check = prompt('test');
+
+        const info = infoToDo(title, description, dueDate, priority, notes, check);
+
+        facilitus[itemRef] = info;
+
+        counters.listOfsaves[displayRef].fillSave = facilitus;
+
+        const whereToDos = document.querySelector('.placeToDos');
+        
+        empty(whereToDos);
+
+        for (let key in facilitus){
+            whereToDos.append(facilitus[key].getAllInfo(key));
+        }
+
+        console.log('congo3')
+    }
+    
     counters.j = 0;
 })
 

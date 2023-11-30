@@ -12,7 +12,11 @@ const infoToDo = (title, description, dueDate, priority, notes, check) => {
         del.classList.add('del');
         del.textContent = 'delete';
 
-        container.append(paragraph, del);
+        const upt = document.createElement('button');
+        upt.classList.add('upt');
+        upt.textContent = 'update';
+
+        container.append(paragraph, del, upt);
 
         return container;
     }
