@@ -126,7 +126,7 @@ manipulateContainer.addEventListener('click', (e) => {
         let displayRef = toDoContainer.dataset.displayNum;
         console.log(displayRef)
         
-        const facilitus = counters.listOfsaves[displayRef].fillSave;
+        let facilitus = counters.listOfsaves[displayRef].fillSave;
         console.log(facilitus);
 
         console.log('congo')
@@ -138,7 +138,20 @@ manipulateContainer.addEventListener('click', (e) => {
 
         e.target.parentNode.remove();
 
-        console.log(facilitus)
+        const converter = Object.values(facilitus);
+        console.log(converter);
+
+        facilitus = {};
+
+        let i = 0;
+        while(i < converter.length){
+            facilitus[i] = converter[i];
+            i++
+        }
+
+        counters.listOfsaves[displayRef].fillSave = facilitus;
+
+        console.log(counters.listOfsaves[displayRef].fillSave)
     }
 
     if(e.target.matches('.upt')){
