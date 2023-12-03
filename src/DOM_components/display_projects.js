@@ -16,7 +16,7 @@ const displayProjects = () => {
 
     projContainer.append(projHeader, projBody);
 
-    return {projContainer};
+    return {projContainer, projBody};
 }
 
 export default displayProjects;

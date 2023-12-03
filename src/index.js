@@ -8,6 +8,8 @@ import nameProjects from './DOM_components/name_projects';
 
 import buttonProject from './DOM_components/button_project';
 
+import buttonHome from './DOM_components/button_home';
+
 import buttonCounters from './LOGIC_components/button_counters';
 
 import infoToDo from './LOGIC_components/info_to_do';
@@ -17,18 +19,22 @@ import saveToDo from './LOGIC_components/save_to_do';
 const component = () => {
     const {container, content, btn} = moldPage();
 
-    const {projContainer} = displayProjects();
+    const {projContainer, projBody} = displayProjects();
 
     const {toDoContainer, containerNumber} = displayToDos();
 
     const {getTitle, passNumber} = buttonProject();
 
-    return {container, content, btn, projContainer, toDoContainer, containerNumber, getTitle, passNumber}
+    const {projHome} = buttonHome();
+
+    return {container, content, btn, projContainer, toDoContainer, projBody, projHome, containerNumber, getTitle, passNumber}
 }
 
 const page = component();
 
 page.container.append(page.btn, page.projContainer, page.content);
+
+page.projBody.append(page.projHome);
 
 page.content.append(page.toDoContainer);
 
@@ -45,8 +51,12 @@ function empty(element) {
 const manipulateContainer = document.querySelector('.container');
 
 manipulateContainer.addEventListener('click', (e) => {
-    //add projects
     if(e.target.matches('.btnHome')){
+        console.log('banana')
+    }
+    
+    //add projects
+    if(e.target.matches('.btnProject')){
         const newProj = nameProjects();
         
         newProj.passTitle(page.getTitle());

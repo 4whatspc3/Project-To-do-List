@@ -9,7 +9,7 @@ const moldPage = () => {
     content.style.border = '1px solid pink';
 
     const btn = document.createElement('button');
-    btn.classList.add('btnHome');
+    btn.classList.add('btnProject');
     btn.textContent = 'click me';
 
     return {container, content, btn}
