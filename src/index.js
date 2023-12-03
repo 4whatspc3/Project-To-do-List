@@ -6,7 +6,7 @@ import displayProjects from './DOM_components/display_projects';
 
 import nameProjects from './DOM_components/name_projects';
 
-import buttonHome from './DOM_components/button_home';
+import buttonProject from './DOM_components/button_project';
 
 import buttonCounters from './LOGIC_components/button_counters';
 
@@ -21,7 +21,7 @@ const component = () => {
 
     const {toDoContainer, containerNumber} = displayToDos();
 
-    const {getTitle, passNumber} = buttonHome();
+    const {getTitle, passNumber} = buttonProject();
 
     return {container, content, btn, projContainer, toDoContainer, containerNumber, getTitle, passNumber}
 }

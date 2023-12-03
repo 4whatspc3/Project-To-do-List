@@ -1,4 +1,4 @@
-const buttonHome = () => {
+const buttonProject = () => {
     const getTitle = () => {
         let title = prompt('test');
 
@@ -17,4 +17,4 @@ const buttonHome = () => {
     return {getTitle, passNumber}
 }
 
-export default buttonHome;
+export default buttonProject;
