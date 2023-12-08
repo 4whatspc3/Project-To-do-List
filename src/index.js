@@ -52,7 +52,33 @@ const manipulateContainer = document.querySelector('.container');
 
 manipulateContainer.addEventListener('click', (e) => {
     if(e.target.matches('.btnHome')){
-        console.log('banana')
+        const manipulateContent = document.querySelector('.content');
+
+        empty(manipulateContent);
+
+        manipulateContent.append(page.toDoContainer);
+
+        page.containerNumber('home');
+
+        const whereToDos = document.querySelector('.placeToDos');
+            
+        empty(whereToDos);
+
+        if(counters.i === 0){
+            const defaultMessage = document.createElement('p');
+           
+            defaultMessage.textContent = 'There are no tasks';
+
+            whereToDos.append(defaultMessage);
+
+            console.log(counters.i)
+        } else {
+            console.log('melão')
+
+            console.log(counters.listOfDisplays);
+            console.log(counters.listOfsaves);
+            (console.log(counters.i))
+        }
     }
     
     //add projects
@@ -91,7 +117,10 @@ manipulateContainer.addEventListener('click', (e) => {
     }
 
     if(e.target.matches('.btnToDo')){
+        counters.i++
+        
         let reference = e.target.parentNode.dataset.displayNum;
+        
         let lengthReference = Object.keys(counters.listOfsaves[reference].fillSave).length;
 
         if(lengthReference > 0){
@@ -131,6 +160,8 @@ manipulateContainer.addEventListener('click', (e) => {
     }
 
     if(e.target.matches('.del')){
+        counters.i--
+        
         const toDoContainer = document.querySelector('.toDoContainer');
 
         let displayRef = toDoContainer.dataset.displayNum;
