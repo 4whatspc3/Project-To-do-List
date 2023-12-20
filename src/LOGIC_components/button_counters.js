@@ -1,7 +1,8 @@
 const buttonCounters = () => {
     let i = 0,
         j = 0,
-        k = 0;
+        k = 0,
+        x = 0;
 
     const listOfsaves = [];
     

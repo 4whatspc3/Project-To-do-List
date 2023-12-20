@@ -52,6 +52,7 @@ const manipulateContainer = document.querySelector('.container');
 
 manipulateContainer.addEventListener('click', (e) => {
     if(e.target.matches('.btnHome')){
+
         const manipulateContent = document.querySelector('.content');
 
         empty(manipulateContent);
@@ -75,9 +76,21 @@ manipulateContainer.addEventListener('click', (e) => {
         } else {
             console.log('melão')
 
-            console.log(counters.listOfDisplays);
+            while(counters.x < counters.listOfsaves.length){
+                let provisorySave = counters.listOfsaves[counters.x].fillSave;
+
+                for (let key in provisorySave){
+                    
+                    whereToDos.append(provisorySave[key].getAllInfo(key));
+                }
+
+                counters.x++
+            }
+
             console.log(counters.listOfsaves);
             (console.log(counters.i))
+
+            counters.x = 0;
         }
     }
     
@@ -161,6 +174,10 @@ manipulateContainer.addEventListener('click', (e) => {
 
     if(e.target.matches('.del')){
         counters.i--
+
+        if(counters.i < 0){
+            counters.i = 0;
+        }
         
         const toDoContainer = document.querySelector('.toDoContainer');
 
