@@ -72,9 +72,7 @@ manipulateContainer.addEventListener('click', (e) => {
 
             whereToDos.append(defaultMessage);
 
-            console.log(counters.i)
         } else {
-            console.log('melão')
 
             while(counters.x < counters.listOfsaves.length){
                 let provisorySave = counters.listOfsaves[counters.x].fillSave;
@@ -82,13 +80,14 @@ manipulateContainer.addEventListener('click', (e) => {
                 for (let key in provisorySave){
                     
                     whereToDos.append(provisorySave[key].getAllInfo(key));
+
+                    document.querySelector('button.del').remove();
+
+                    document.querySelector('button.upt').remove();
                 }
 
                 counters.x++
             }
-
-            console.log(counters.listOfsaves);
-            (console.log(counters.i))
 
             counters.x = 0;
         }
@@ -173,6 +172,7 @@ manipulateContainer.addEventListener('click', (e) => {
     }
 
     if(e.target.matches('.del')){
+        let itemRef;
         counters.i--
 
         if(counters.i < 0){
@@ -182,22 +182,22 @@ manipulateContainer.addEventListener('click', (e) => {
         const toDoContainer = document.querySelector('.toDoContainer');
 
         let displayRef = toDoContainer.dataset.displayNum;
-        console.log(displayRef)
         
         let facilitus = counters.listOfsaves[displayRef].fillSave;
-        console.log(facilitus);
 
-        console.log('congo')
+        let lengthReference = Object.keys(facilitus).length;
 
-        let itemRef = e.target.parentNode.dataset.todoNum;
-        console.log(facilitus[itemRef])
-
+        if(lengthReference === 1){
+            itemRef = 0;
+        } else {
+            itemRef = e.target.parentNode.dataset.todoNum;
+        }
+        
         delete facilitus[itemRef];
 
         e.target.parentNode.remove();
 
         const converter = Object.values(facilitus);
-        console.log(converter);
 
         facilitus = {};
 
@@ -208,27 +208,17 @@ manipulateContainer.addEventListener('click', (e) => {
         }
 
         counters.listOfsaves[displayRef].fillSave = facilitus;
-
-        console.log(counters.listOfsaves[displayRef].fillSave)
     }
 
     if(e.target.matches('.upt')){
-        console.log('ola')
 
         const toDoContainer = document.querySelector('.toDoContainer');
 
         let displayRef = toDoContainer.dataset.displayNum;
-        console.log(displayRef)
         
         const facilitus = counters.listOfsaves[displayRef].fillSave;
-        console.log(facilitus);
-
-        console.log('congo')
 
         let itemRef = e.target.parentNode.dataset.todoNum;
-        console.log(facilitus[itemRef])
-
-        console.log('CONGO2')
 
         let title = prompt('test'),
         description = prompt('test'),
@@ -250,8 +240,6 @@ manipulateContainer.addEventListener('click', (e) => {
         for (let key in facilitus){
             whereToDos.append(facilitus[key].getAllInfo(key));
         }
-
-        console.log('congo3')
     }
     
     counters.j = 0;
