@@ -16,6 +16,8 @@ import infoToDo from './LOGIC_components/info_to_do';
 
 import saveToDo from './LOGIC_components/save_to_do';
 
+import getModal from './FORM_components/forms';
+
 const component = () => {
     const {container, content, btn} = moldPage();
 
@@ -27,7 +29,9 @@ const component = () => {
 
     const {projHome} = buttonHome();
 
-    return {container, content, btn, projContainer, toDoContainer, projBody, projHome, containerNumber, getTitle, passNumber}
+    const {containerForms} = getModal();
+
+    return {container, content, btn, projContainer, toDoContainer, projBody, projHome, containerForms, containerNumber, getTitle, passNumber}
 }
 
 const page = component();
@@ -40,7 +44,7 @@ page.content.append(page.toDoContainer);
 
 page.containerNumber('home');
 
-document.body.append(page.container);
+document.body.append(page.containerForms, page.container);
 
 const counters = buttonCounters();
 
@@ -245,3 +249,20 @@ manipulateContainer.addEventListener('click', (e) => {
     counters.j = 0;
 })
 
+const manipulateContainerForms = document.querySelector('.container-forms');
+
+manipulateContainerForms.addEventListener('click', (e) => {
+    if(e.target.matches('.open-button')){
+        modal.showModal();
+    }
+
+    if(e.target.matches('.close-button')){
+        modal.close();
+    }
+
+    if(e.target.matches('.button')){
+        e.preventDefault();
+
+        console.log('abelha');
+    }
+})
