@@ -152,27 +152,36 @@ manipulateContainer.addEventListener('click', (e) => {
         }
 
         const provisorySave = counters.listOfsaves[reference].fillSave;
+
+        modal.showModal();
+
+        const submitForms = document.querySelector('.form');
+
+        submitForms.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const info = infoToDo(title.value, description.value, dueDate.value, check.value);
+
+            console.log(info)
+
+            provisorySave[counters.k] = info;
+
+            counters.listOfsaves[reference].fillSave = provisorySave;
+
+            const whereToDos = document.querySelector('.placeToDos');
+            
+            empty(whereToDos);
+
+            for (let key in provisorySave){
+                whereToDos.append(provisorySave[key].getAllInfo(key));
+            }
         
-        let title = prompt('test'),
-        description = prompt('test'),
-        dueDate = prompt('test'),
-        priority = prompt('test'),
-        notes = prompt('test'),
-        check = prompt('test');
+            submitForms.reset();
+            
+            modal.close();
+        })
 
-        const info = infoToDo(title, description, dueDate, priority, notes, check);
-
-        provisorySave[counters.k] = info;
-
-        counters.listOfsaves[reference].fillSave = provisorySave;
-
-        const whereToDos = document.querySelector('.placeToDos');
         
-        empty(whereToDos);
-
-        for (let key in provisorySave){
-            whereToDos.append(provisorySave[key].getAllInfo(key));
-        }
     }
 
     if(e.target.matches('.del')){
@@ -247,22 +256,4 @@ manipulateContainer.addEventListener('click', (e) => {
     }
     
     counters.j = 0;
-})
-
-const manipulateContainerForms = document.querySelector('.container-forms');
-
-manipulateContainerForms.addEventListener('click', (e) => {
-    if(e.target.matches('.open-button')){
-        modal.showModal();
-    }
-
-    if(e.target.matches('.close-button')){
-        modal.close();
-    }
-
-    if(e.target.matches('.button')){
-        e.preventDefault();
-
-        console.log('abelha');
-    }
 })
