@@ -133,61 +133,62 @@ manipulateContainer.addEventListener('click', (e) => {
     }
 
     if(e.target.matches('.btnToDo')){
-        counters.i++
-        
+
         let reference = e.target.parentNode.dataset.displayNum;
-        
-        let lengthReference = Object.keys(counters.listOfsaves[reference].fillSave).length;
 
-        if(lengthReference > 0){
+        if (reference !== 'home'){
+            counters.i++
             
-            if(lengthReference === 1) {
-                counters.k = 1;
+            let lengthReference = Object.keys(counters.listOfsaves[reference].fillSave).length;
+
+            if(lengthReference > 0){
+                
+                if(lengthReference === 1) {
+                    counters.k = 1;
+                } else {
+                    counters.k = lengthReference;
+                }
+                
             } else {
-                counters.k = lengthReference;
-            }
-            
-        } else {
-            counters.k = 0;
-        }
-
-        const provisorySave = counters.listOfsaves[reference].fillSave;
-
-        modal.showModal();
-
-        const submitForms = document.querySelector('.form');
-
-        submitForms.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            if(check.checked){
-                check.value = 'Completed';
-            } else {
-                check.value = 'Not completed';
+                counters.k = 0;
             }
 
-            const info = infoToDo(title.value, description.value, dueDate.value, check.value);
+            const provisorySave = counters.listOfsaves[reference].fillSave;
 
-            console.log(info)
+            modal.showModal();
 
-            provisorySave[counters.k] = info;
+            const submitForms = document.querySelector('.form');
 
-            counters.listOfsaves[reference].fillSave = provisorySave;
+            submitForms.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                if(check.checked){
+                    check.value = 'Completed';
+                } else {
+                    check.value = 'Not completed';
+                }
 
-            const whereToDos = document.querySelector('.placeToDos');
+                const info = infoToDo(title.value, description.value, dueDate.value, check.value);
+
+                console.log(info)
+
+                provisorySave[counters.k] = info;
+
+                counters.listOfsaves[reference].fillSave = provisorySave;
+
+                const whereToDos = document.querySelector('.placeToDos');
+                
+                empty(whereToDos);
+
+                for (let key in provisorySave){
+                    whereToDos.append(provisorySave[key].getAllInfo(key));
+                }
             
-            empty(whereToDos);
-
-            for (let key in provisorySave){
-                whereToDos.append(provisorySave[key].getAllInfo(key));
-            }
-        
-            submitForms.reset();
-            
-            modal.close();
-        })
-
-        
+                submitForms.reset();
+                
+                modal.close();
+            })
+        }        
     }
 
     if(e.target.matches('.del')){
