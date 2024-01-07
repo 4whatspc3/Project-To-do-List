@@ -126,7 +126,12 @@ const getCheck = () => {
 }
 
 const getAttributes = (type, id, name, minlength, required) => {
-    return {type, id, name, minlength, required}
+    if(required === undefined){
+        return {type, id, name, minlength}
+    } else {
+        return {type, id, name, minlength, required}
+    }
+
 }
 
 const passAttributes = (element, attributes) => {

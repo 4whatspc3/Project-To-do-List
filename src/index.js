@@ -160,6 +160,12 @@ manipulateContainer.addEventListener('click', (e) => {
         submitForms.addEventListener('submit', (e) => {
             e.preventDefault();
             
+            if(check.checked){
+                check.value = 'Completed';
+            } else {
+                check.value = 'Not completed';
+            }
+
             const info = infoToDo(title.value, description.value, dueDate.value, check.value);
 
             console.log(info)
