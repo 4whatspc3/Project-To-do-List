@@ -10,7 +10,7 @@ const moldPage = () => {
 
     const btn = document.createElement('button');
     btn.classList.add('btnProject');
-    btn.textContent = 'click me';
+    btn.textContent = 'Create a project';
 
     return {container, content, btn}
 }

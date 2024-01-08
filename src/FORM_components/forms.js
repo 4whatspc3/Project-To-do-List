@@ -9,7 +9,7 @@ const getModal = () => {
 
     const btnOpenModal = document.createElement('button');
     btnOpenModal.classList.add('open-button');
-    btnOpenModal.textContent = 'Open modal';
+    btnOpenModal.textContent = 'Add to-do';
 
     const dialog = document.createElement('dialog');
     dialog.classList.add('modal');

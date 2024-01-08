@@ -42,9 +42,11 @@ page.projBody.append(page.projHome);
 
 page.content.append(page.toDoContainer);
 
+page.toDoContainer.append(page.containerForms);
+
 page.containerNumber('home');
 
-document.body.append(page.containerForms, page.container);
+document.body.append(page.container);
 
 const counters = buttonCounters();
 
@@ -123,18 +125,22 @@ manipulateContainer.addEventListener('click', (e) => {
         
         let reference = e.target.dataset.projNum;
 
+        let displayReference = counters.listOfDisplays[reference].toDoContainer;
+
         const manipulateContent = document.querySelector('.content');
 
         empty(manipulateContent);
 
-        manipulateContent.append(counters.listOfDisplays[reference].toDoContainer)
+        manipulateContent.append(displayReference);
+
+        displayReference.append(page.containerForms);
 
         counters.listOfDisplays[reference].containerNumber(reference);
     }
 
-    if(e.target.matches('.btnToDo')){
+    if(e.target.matches('.open-button')){
 
-        let reference = e.target.parentNode.dataset.displayNum;
+        let reference = e.target.parentNode.parentNode.parentNode.dataset.displayNum;
 
         if (reference !== 'home'){
             counters.i++
