@@ -176,8 +176,6 @@ manipulateContainer.addEventListener('click', (e) => {
 
                 const info = infoToDo(title.value, description.value, dueDate.value, check.value);
 
-                console.log(info)
-
                 provisorySave[counters.k] = info;
 
                 counters.listOfsaves[reference].fillSave = provisorySave;
@@ -189,11 +187,12 @@ manipulateContainer.addEventListener('click', (e) => {
                 for (let key in provisorySave){
                     whereToDos.append(provisorySave[key].getAllInfo(key));
                 }
-            
-                submitForms.reset();
                 
                 modal.close();
             })
+
+            submitForms.reset();
+
         }        
     }
 
@@ -266,6 +265,12 @@ manipulateContainer.addEventListener('click', (e) => {
         for (let key in facilitus){
             whereToDos.append(facilitus[key].getAllInfo(key));
         }
+    }
+
+    if(e.target.matches('.close-button')){
+        modal.close();
+
+        console.log(counters.listOfsaves)
     }
     
     counters.j = 0;
