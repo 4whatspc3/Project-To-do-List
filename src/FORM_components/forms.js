@@ -73,7 +73,7 @@ const getTitle = () => {
     titleLabel.setAttribute('for', 'title');
 
     const titleInput = document.createElement('input');
-    const titleAttributes = getAttributes('text', 'title', 'title', '1', 'true');
+    const titleAttributes = getAttributes('text', 'title', 'title', '1');
 
     title.append(titleLabel, titleInput);
 
@@ -88,7 +88,7 @@ const getDescription = () => {
     descrLabel.setAttribute('for', 'description');
 
     const descrInput = document.createElement('input');
-    const descrAttributes = getAttributes('text', 'description', 'description', '1', 'true');
+    const descrAttributes = getAttributes('text', 'description', 'description', '1');
     
     description.append(descrLabel, descrInput);
 
@@ -103,7 +103,7 @@ const getDueDate = () => {
     dueDateLabel.setAttribute('for', 'dueDate');
 
     const dueDateInput = document.createElement('input');
-    const dueDateAttributes = getAttributes('date', 'dueDate', 'dueDate', '2024-01-01', 'true');
+    const dueDateAttributes = getAttributes('date', 'dueDate', 'dueDate', '2024-01-01');
     
     dueDate.append(dueDateLabel, dueDateInput);
 
@@ -125,13 +125,8 @@ const getCheck = () => {
     return {check, checkLabel, checkInput, checkAttributes}
 }
 
-const getAttributes = (type, id, name, minlength, required) => {
-    if(required === undefined){
-        return {type, id, name, minlength}
-    } else {
-        return {type, id, name, minlength, required}
-    }
-
+const getAttributes = (type, id, name, minlength) => {
+    return {type, id, name, minlength}
 }
 
 const passAttributes = (element, attributes) => {
