@@ -118,8 +118,6 @@ manipulateContainer.addEventListener('click', (e) => {
         placeProjects.append(newProj.projBlock);
 
         page.passNumber('btnTitle', counters.j)
-
-        console.log(counters.listOfsaves)
     }
     
     //add a place to display the to-do items
@@ -138,17 +136,17 @@ manipulateContainer.addEventListener('click', (e) => {
         displayReference.append(page.containerForms);
 
         counters.listOfDisplays[reference].containerNumber(reference);
+
+        counters.z = 0;
     }
 
     if(e.target.matches('.button')){
 
-        let reference = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.dataset.displayNum;
+        if(counters.z === 0){
+            let reference = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.dataset.displayNum;
 
-        console.log(reference)
-
-        if (reference !== 'home'){
             counters.i++
-            
+                
             let lengthReference = Object.keys(counters.listOfsaves[reference].fillSave).length;
 
             if(lengthReference > 0){
@@ -164,8 +162,6 @@ manipulateContainer.addEventListener('click', (e) => {
             }
 
             const provisorySave = counters.listOfsaves[reference].fillSave;
-
-            console.log(provisorySave)
                 
             if(check.checked){
                 check.value = 'Completed';
@@ -192,8 +188,57 @@ manipulateContainer.addEventListener('click', (e) => {
             const submitForms = document.querySelector('.form');
 
             submitForms.reset();
+        } else {
+            const toDoContainer = document.querySelector('.toDoContainer');
 
-        }        
+            let displayRef = toDoContainer.dataset.displayNum;
+            
+            const facilitus = counters.listOfsaves[displayRef].fillSave;
+
+            const tempCopy = {};
+
+            Object.assign(tempCopy, facilitus);
+
+            if(title.value === ''){
+                title.value = tempCopy[counters.itemRef].title;
+            }
+
+            if(description.value === ''){
+                description.value = tempCopy[counters.itemRef].description;
+            }
+
+            if(dueDate.value === ''){
+                dueDate.value = tempCopy[counters.itemRef].dueDate;
+            }
+
+            if(check.checked){
+                check.value = 'Completed';
+            } else {
+                check.value = 'Not completed';
+            }
+
+            const info = infoToDo(title.value, description.value, dueDate.value, check.value);
+
+            facilitus[counters.itemRef] = info;
+
+            counters.listOfsaves[displayRef].fillSave = facilitus;
+
+            const whereToDos = document.querySelector('.placeToDos');
+            
+            empty(whereToDos);
+
+            for (let key in facilitus){
+                whereToDos.append(facilitus[key].getAllInfo(key));
+            }
+
+            modal.close();
+
+            const submitForms = document.querySelector('.form');
+
+            submitForms.reset();
+
+        }
+        
     }
 
     if(e.target.matches('.del')){
@@ -237,46 +282,23 @@ manipulateContainer.addEventListener('click', (e) => {
 
     if(e.target.matches('.upt')){
 
-        const toDoContainer = document.querySelector('.toDoContainer');
+        modal.showModal();
 
-        let displayRef = toDoContainer.dataset.displayNum;
-        
-        const facilitus = counters.listOfsaves[displayRef].fillSave;
+        counters.itemRef = e.target.parentNode.dataset.todoNum;
 
-        let itemRef = e.target.parentNode.dataset.todoNum;
-
-        let title = prompt('test'),
-        description = prompt('test'),
-        dueDate = prompt('test'),
-        priority = prompt('test'),
-        notes = prompt('test'),
-        check = prompt('test');
-
-        const info = infoToDo(title, description, dueDate, priority, notes, check);
-
-        facilitus[itemRef] = info;
-
-        counters.listOfsaves[displayRef].fillSave = facilitus;
-
-        const whereToDos = document.querySelector('.placeToDos');
-        
-        empty(whereToDos);
-
-        for (let key in facilitus){
-            whereToDos.append(facilitus[key].getAllInfo(key));
-        }
+        counters.z = 1;
     }
 
     if(e.target.matches('.open-button')){
-        modal.showModal();
+        let reference = e.target.parentNode.parentNode.parentNode.dataset.displayNum;
 
-        console.log(counters.listOfsaves)
+        if(reference !== 'home'){
+            modal.showModal();
+        }
     }
 
     if(e.target.matches('.close-button')){
         modal.close();
-
-        console.log(counters.listOfsaves)
     }
     
     counters.j = 0;

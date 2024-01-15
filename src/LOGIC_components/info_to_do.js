@@ -4,10 +4,18 @@ const infoToDo = (title, description, dueDate, check) => {
         const container = document.createElement('div');
         container.setAttribute('data-todo-num', element);
         
-        const paragraph = document.createElement('p');
-        paragraph.textContent = `title: ${title}, description: ${description}, due date: ${dueDate},
-                                 check: ${check}`;
+        const pgTitle = document.createElement('p');
+        pgTitle.textContent = `title: ${title}`;
 
+        const pgDescription = document.createElement('p');
+        pgDescription.textContent = `description: ${description}`;
+
+        const pgDueData = document.createElement('p');
+        pgDueData.textContent = `due date: ${dueDate}`;
+
+        const pgCheck = document.createElement('p');
+        pgCheck.textContent = `check: ${check}`;
+ 
         const del = document.createElement('button');
         del.classList.add('del');
         del.textContent = 'delete';
@@ -16,7 +24,7 @@ const infoToDo = (title, description, dueDate, check) => {
         upt.classList.add('upt');
         upt.textContent = 'update';
 
-        container.append(paragraph, del, upt);
+        container.append(pgTitle, pgDescription, pgDueData, pgCheck, del, upt);
 
         return container;
     }
