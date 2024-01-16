@@ -41,6 +41,10 @@ const getForms = () => {
     const {dueDate, dueDateInput, dueDateLabel, dueDateAttributes} = getDueDate();
 
     const {check, checkLabel, checkInput, checkAttributes} = getCheck();
+
+    const {notes, notesLabel, notesInput, notesAttributes} = getNotes();
+
+    const {priority, lowLabel, lowInput, mediumLabel, mediumInput, highLabel, highInput, lowAttributes, mediumAttributes, highAttributes} = getPriority();
     
     const forms = document.createElement('form');
     forms.classList.add('form');
@@ -54,13 +58,21 @@ const getForms = () => {
     passAttributes(dueDateInput, dueDateAttributes);
 
     passAttributes(checkInput, checkAttributes);
+
+    passAttributes(notesInput, notesAttributes);
+
+    passAttributes(lowInput, lowAttributes);
+
+    passAttributes(mediumInput, mediumAttributes);
+
+    passAttributes(highInput, highAttributes);
     
     const btnSubmit = document.createElement('button');
     btnSubmit.classList.add('button');
     btnSubmit.setAttribute('type', 'submit');
     btnSubmit.textContent = 'Submit form';
 
-    forms.append(title, description, dueDate, check, btnSubmit);
+    forms.append(title, description, dueDate, check, notes, priority, btnSubmit);
 
     return {forms}
 }
@@ -87,7 +99,7 @@ const getDescription = () => {
     descrLabel.textContent = 'Description:';
     descrLabel.setAttribute('for', 'description');
 
-    const descrInput = document.createElement('input');
+    const descrInput = document.createElement('textarea');
     const descrAttributes = getAttributes('text', 'description', 'description', '1');
     
     description.append(descrLabel, descrInput);
@@ -125,8 +137,69 @@ const getCheck = () => {
     return {check, checkLabel, checkInput, checkAttributes}
 }
 
+const getNotes = () => {
+    const notes = document.createElement('div');
+
+    const notesLabel = document.createElement('label');
+    notesLabel.textContent = 'Notes:';
+    notesLabel.setAttribute('for', 'notes');
+
+    const notesInput = document.createElement('textarea');
+    const notesAttributes = getAttributes('text', 'notes', 'notes', '1');
+    
+    notes.append(notesLabel, notesInput);
+
+    return {notes, notesLabel, notesInput, notesAttributes}
+}
+
+const getPriority = () => {
+    const priority = document.createElement('div');
+    priority.classList.add('priorityOptions');
+
+    const priorityOne = document.createElement('div');
+
+    const lowLabel = document.createElement('label');
+    lowLabel.textContent = 'Low';
+    lowLabel.setAttribute('for', 'low');
+
+    const lowInput = document.createElement('input');
+    const lowAttributes = getRadioAttributes('radio', 'low', 'priority', 'low');
+
+    priorityOne.append(lowInput, lowLabel);
+
+    const priorityTwo = document.createElement('div');
+
+    const mediumLabel = document.createElement('label');
+    mediumLabel.textContent = 'Medium';
+    mediumLabel.setAttribute('for', 'medium');
+
+    const mediumInput = document.createElement('input');
+    const mediumAttributes = getRadioAttributes('radio', 'medium', 'priority', 'medium');
+
+    priorityTwo.append(mediumInput, mediumLabel);
+
+    const priorityThree = document.createElement('div');
+
+    const highLabel = document.createElement('label');
+    highLabel.textContent = 'High';
+    highLabel.setAttribute('for', 'high');
+
+    const highInput = document.createElement('input');
+    const highAttributes = getRadioAttributes('radio', 'high', 'priority', 'high');
+
+    priorityThree.append(highInput, highLabel);
+
+    priority.append(priorityOne, priorityTwo, priorityThree);
+
+    return {priority, lowLabel, lowInput, mediumLabel, mediumInput, highLabel, highInput, lowAttributes, mediumAttributes, highAttributes}
+}
+
 const getAttributes = (type, id, name, minlength) => {
     return {type, id, name, minlength}
+}
+
+const getRadioAttributes = (type, id, name, value) => {
+    return {type, id, name, value}
 }
 
 const passAttributes = (element, attributes) => {

@@ -170,7 +170,32 @@ manipulateContainer.addEventListener('click', (e) => {
                 check.value = 'Not completed';
             }
 
-            const info = infoToDo(title.value, description.value, dueDate.value, check.value);
+            let priority;
+
+            const priorityOptions = document.querySelectorAll('.priorityOptions div input');
+
+            priorityOptions.forEach(option => {
+                if(option.checked){
+                    
+                    if(option.value === 'low'){
+                        priority = 'low';
+                        
+                    }
+
+                    if(option.value === 'medium'){
+                        priority = 'medium';
+                        
+                    }
+
+                    if(option.value === 'high'){
+                        priority = 'high';
+                        
+                    }
+                    
+                }
+            })
+
+            const info = infoToDo(title.value, description.value, dueDate.value, check.value, notes.value, priority);
 
             provisorySave[counters.k] = info;
 
@@ -218,7 +243,36 @@ manipulateContainer.addEventListener('click', (e) => {
                 check.value = 'Not completed';
             }
 
-            const info = infoToDo(title.value, description.value, dueDate.value, check.value);
+            if(notes.value === ''){
+                notes.value = tempCopy[counters.itemRef].notes;
+            }
+
+            let priority;
+
+            const priorityOptions = document.querySelectorAll('.priorityOptions div input');
+
+            priorityOptions.forEach(option => {
+                if(option.checked){
+                    
+                    if(option.value === 'low'){
+                        priority = 'low';
+                        
+                    }
+
+                    if(option.value === 'medium'){
+                        priority = 'medium';
+                        
+                    }
+
+                    if(option.value === 'high'){
+                        priority = 'high';
+                        
+                    }
+                    
+                }
+            })
+
+            const info = infoToDo(title.value, description.value, dueDate.value, check.value, notes.value, priority);
 
             facilitus[counters.itemRef] = info;
 
