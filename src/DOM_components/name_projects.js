@@ -8,12 +8,16 @@ const nameProjects = () => {
 
     const projTitle = document.createElement('button');
     projTitle.classList.add('btnTitle');
+
+    const projDel = document.createElement('button');
+    projDel.classList.add('projDel');
+    projDel.textContent = 'delete';
     
     const passTitle  = (title) => {
         projTitle.textContent = title;
     }
 
-    projBlock.append(contentImage, projTitle);
+    projBlock.append(contentImage, projTitle, projDel);
 
     return {projBlock, passTitle}
 }

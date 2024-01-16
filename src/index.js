@@ -118,6 +118,7 @@ manipulateContainer.addEventListener('click', (e) => {
         placeProjects.append(newProj.projBlock);
 
         page.passNumber('btnTitle', counters.j)
+        page.passNumber('projDel', counters.j)
     }
     
     //add a place to display the to-do items
@@ -241,8 +242,56 @@ manipulateContainer.addEventListener('click', (e) => {
         
     }
 
+    if(e.target.matches('.projDel')){
+
+        let reference = e.target.dataset.projNum;
+
+        let facilitus = counters.listOfsaves[reference].fillSave;
+
+        counters.i = counters.i - Object.keys(facilitus).length;
+
+        if(counters.i < 0){
+            counters.i = 0;
+        }
+
+        delete counters.listOfDisplays[reference];
+
+        let displayMirror = Object.values(counters.listOfDisplays);
+
+        counters.listOfDisplays = displayMirror;
+
+        delete counters.listOfsaves[reference];
+
+        let saveMirror = Object.values(counters.listOfsaves);
+
+        counters.listOfsaves = saveMirror;
+
+        e.target.parentNode.remove();
+
+        page.passNumber('btnTitle', counters.j)
+        page.passNumber('projDel', counters.j)
+
+        const manipulateContent = document.querySelector('.content');
+
+        empty(manipulateContent);
+
+        manipulateContent.append(page.toDoContainer);
+
+        page.containerNumber('home');
+
+        const whereToDos = document.querySelector('.placeToDos');
+            
+        empty(whereToDos);
+
+        const defaultMessage = document.createElement('p');
+        
+        defaultMessage.textContent = 'Select or create a new project';
+
+        whereToDos.append(defaultMessage);
+
+    }
+
     if(e.target.matches('.del')){
-        let itemRef;
         counters.i--
 
         if(counters.i < 0){
@@ -258,12 +307,12 @@ manipulateContainer.addEventListener('click', (e) => {
         let lengthReference = Object.keys(facilitus).length;
 
         if(lengthReference === 1){
-            itemRef = 0;
+            counters.itemRef = 0;
         } else {
-            itemRef = e.target.parentNode.dataset.todoNum;
+            counters.itemRef = e.target.parentNode.dataset.todoNum;
         }
         
-        delete facilitus[itemRef];
+        delete facilitus[counters.itemRef];
 
         e.target.parentNode.remove();
 
