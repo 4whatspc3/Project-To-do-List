@@ -8,7 +8,6 @@ const displayToDos = () => {
 
     const placeToDos = document.createElement('div');
     placeToDos.classList.add('placeToDos');
-    placeToDos.style.border = '1px solid green';
 
     toDoContainer.append(placeToDos);
 

@@ -18,6 +18,8 @@ import saveToDo from './LOGIC_components/save_to_do';
 
 import getModal from './FORM_components/forms';
 
+import './styles/style.css';
+
 const component = () => {
     const {container, content, btn} = moldPage();
 

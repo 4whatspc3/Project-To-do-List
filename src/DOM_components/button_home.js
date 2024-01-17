@@ -1,7 +1,6 @@
 const buttonHome = () => {
     const projHome = document.createElement('div');
     projHome.classList.add('projHome');
-    projHome.style.border = '1px solid purple';
 
     const contentImage = document.createElement('img');
     //contentImage.setAttribute('src', image);
