@@ -1,5 +1,60 @@
 /* code here */
 
 * {
-    border: 1px solid black;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+html, body {
+    height: 100%;
+    font-family: 'Roboto', system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.container {
+    height: 100%;
+    width: auto;
+    padding: 5px;
+    display: grid;
+    grid-template: 0.25fr 0.25fr 2fr 0.5fr / repeat(3, 1fr);
+}
+
+.btnProject {
+    grid-area: 2 / 1 / 3 / 2;
+    place-self: center;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: #00ffff;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.btnProject:hover {
+    background-color: #19e5e6;
+}
+
+.projContainer {
+    grid-area: 3 / 1 / 4 / 2;
+}
+
+.content,
+.toDoContainer {
+    grid-area: 3 / 1 / 5 / 4;
+    display: grid;
+    grid-template: 2fr 0.5fr / repeat(3, 1fr);
+}
+
+.toDoContainer {
+    grid-area: 1 / 1 / 3 / 4;
+}
+
+.placeToDos {
+    grid-area: 1 / 2 / 3 / 4;
+}
+
+.container-forms {
+    grid-area: 2 / 1 / 3 / 2;
 }
