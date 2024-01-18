@@ -2,7 +2,7 @@ const nameProjects = () => {
     const projBlock = document.createElement('div');
     projBlock.classList.add('projBlock');
 
-    const contentImage = document.createElement('img');
+    //const contentImage = document.createElement('img');
     //contentImage.setAttribute('src', image);
 
     const projTitle = document.createElement('button');
@@ -16,7 +16,8 @@ const nameProjects = () => {
         projTitle.textContent = title;
     }
 
-    projBlock.append(contentImage, projTitle, projDel);
+    //contentImage 
+    projBlock.append(projTitle, projDel);
 
     return {projBlock, passTitle}
 }

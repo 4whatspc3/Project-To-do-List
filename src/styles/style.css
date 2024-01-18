@@ -19,25 +19,80 @@ html, body {
     padding: 5px;
     display: grid;
     grid-template: 0.25fr 0.25fr 2fr 0.5fr / repeat(3, 1fr);
+    z-index: -1;
 }
 
 .btnProject {
     grid-area: 2 / 1 / 3 / 2;
     place-self: center;
-    padding: 5px 10px;
+}
+
+.btnProject,
+.open-button {
+    padding: 10px 10px;
     border: none;
     border-radius: 5px;
     font-size: 15px;
-    background-color: #00ffff;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    font-weight: bold;
+    color:#ffffff;
+    background-color: #19e5e6;
 }
 
-.btnProject:hover {
-    background-color: #19e5e6;
+.btnProject:hover,
+.open-button:hover {
+    background-color: #ffffff;
+    color: #19e5e6;
+    border: 2px solid #00ffff;
 }
 
 .projContainer {
     grid-area: 3 / 1 / 4 / 2;
+    display: grid;
+    grid-template-rows: 0.25fr 2fr;
+    z-index: 2;
+}
+
+.projHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.projHeader > p {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.projBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: left;
+    gap: 25px;
+    padding-left: 10px;
+}
+
+.projBlock {
+    display: flex;
+    gap: 25px;
+}
+
+.btnHome,
+.projBlock button {
+    padding: 10px 10px;
+    border: 2px solid #00ffff;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #19e5e6;
+    background-color: #ffffff;
+}
+
+.btnHome:hover,
+.btnTitle:hover,
+.projDel:hover {
+    background-color: #19e5e6;
+    color: #ffffff;
 }
 
 .content,
@@ -45,6 +100,7 @@ html, body {
     grid-area: 3 / 1 / 5 / 4;
     display: grid;
     grid-template: 2fr 0.5fr / repeat(3, 1fr);
+    z-index: 1;
 }
 
 .toDoContainer {
