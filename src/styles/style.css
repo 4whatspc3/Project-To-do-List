@@ -109,6 +109,54 @@ html, body {
 
 .placeToDos {
     grid-area: 1 / 2 / 3 / 4;
+    display: flex;
+    justify-content: left;
+    align-items: top;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+[data-todo-num] {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: left;
+    gap: 10px;
+    width: 250px;
+    height: 300px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #19e5e6;
+    overflow: auto;
+}
+
+[data-todo-num] button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #19e5e6;
+    background-color: #ffffff;
+}
+
+[data-todo-num] > div {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 20px;
+}
+
+[data-todo-num] > div > p:first-child {
+    font-weight: bold;
+    font-size: 17px;
+    color: #ffffff;
+}
+
+.del:hover,
+.upt:hover {
+    font-size: 16px;
 }
 
 .container-forms {
@@ -214,3 +262,4 @@ input[type="checkbox"]::before {
     background-color: #19e5e6;
     color: #ffffff;
 }
+

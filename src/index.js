@@ -89,9 +89,9 @@ manipulateContainer.addEventListener('click', (e) => {
                     
                     whereToDos.append(provisorySave[key].getAllInfo(key));
 
-                    document.querySelector('button.del').remove();
+                    document.querySelector('button.del').disabled = true;
 
-                    document.querySelector('button.upt').remove();
+                    document.querySelector('button.upt').disabled = true;
                 }
 
                 counters.x++
