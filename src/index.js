@@ -21,7 +21,7 @@ import getModal from './FORM_components/forms';
 import './styles/style.css';
 
 const component = () => {
-    const {container, content, btn} = moldPage();
+    const {container, header, content, btn} = moldPage();
 
     const {projContainer, projBody} = displayProjects();
 
@@ -33,12 +33,12 @@ const component = () => {
 
     const {containerForms} = getModal();
 
-    return {container, content, btn, projContainer, toDoContainer, projBody, projHome, containerForms, containerNumber, getTitle, passNumber}
+    return {container, header, content, btn, projContainer, toDoContainer, projBody, projHome, containerForms, containerNumber, getTitle, passNumber}
 }
 
 const page = component();
 
-page.container.append(page.btn, page.projContainer, page.content);
+page.container.append(page.header, page.btn, page.projContainer, page.content);
 
 page.projBody.append(page.projHome);
 

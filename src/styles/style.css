@@ -18,8 +18,24 @@ html, body {
     width: auto;
     padding: 5px;
     display: grid;
-    grid-template: 0.25fr 0.25fr 2fr 0.5fr / repeat(3, 1fr);
+    grid-template: 0.25fr 0.25fr 2fr 0.5fr / 0.5fr 1fr 1fr;
     z-index: -1;
+}
+
+.container > div:first-child {
+    grid-area: 1 / 1 / 2 / 4;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 10px;
+    background-color: #19e5e6;
+    border-radius: 5px;
+}
+
+.container > div:first-child > p {
+    font-size: 40px;
+    font-weight: bold;
+    color: #ffffff;
 }
 
 .btnProject {
@@ -43,6 +59,10 @@ html, body {
     background-color: #ffffff;
     color: #19e5e6;
     border: 2px solid #00ffff;
+}
+
+.open-modal {
+    padding-left: 10px;
 }
 
 .projContainer {
@@ -70,6 +90,13 @@ html, body {
     align-items: left;
     gap: 25px;
     padding-left: 10px;
+    overflow: auto;
+    max-height: 500px;
+}
+
+.projHeader,
+.projBody {
+    border-right: 2px dotted #00ffff;
 }
 
 .projBlock {
@@ -99,7 +126,7 @@ html, body {
 .toDoContainer {
     grid-area: 3 / 1 / 5 / 4;
     display: grid;
-    grid-template: 2fr 0.5fr / repeat(3, 1fr);
+    grid-template: 2fr 0.5fr / 0.5fr 1fr 1fr;
     z-index: 1;
 }
 
@@ -114,6 +141,19 @@ html, body {
     align-items: top;
     flex-wrap: wrap;
     gap: 10px;
+    padding-left: 10px;
+    overflow: auto;
+}
+
+.placeToDos > p {
+    height: 40px;
+    padding: 10px;
+    border: 2px solid #00ffff;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #19e5e6;
+    background-color: #ffffff;
 }
 
 [data-todo-num] {
