@@ -121,6 +121,14 @@ manipulateContainer.addEventListener('click', (e) => {
 
         page.passNumber('btnTitle', counters.j)
         page.passNumber('projDel', counters.j)
+
+        counters.listOfProjects = [];
+
+        const btnTitle = document.querySelectorAll('.btnTitle');
+
+        btnTitle.forEach(btn => {
+            counters.listOfProjects.push(btn.textContent)
+        })
     }
     
     //add a place to display the to-do items
@@ -140,7 +148,25 @@ manipulateContainer.addEventListener('click', (e) => {
 
         counters.listOfDisplays[reference].containerNumber(reference);
 
+        const provisorySave = counters.listOfsaves[reference].fillSave;
+
+        for(let i = 0; i < Object.keys(counters.listOfsaves[reference].fillSave).length; i++) {
+            const info = infoToDo(provisorySave[i]['title'], provisorySave[i]['description'], provisorySave[i]['dueDate'], provisorySave[i]['check'], provisorySave[i]['notes'], provisorySave[i]['priority']);
+
+            provisorySave[i] = info;
+        }
+
+        const whereToDos = document.querySelector('.placeToDos');
+            
+        empty(whereToDos);
+
+        for (let key in provisorySave){
+            whereToDos.append(provisorySave[key].getAllInfo(key));
+        }
+
         counters.z = 0;
+
+        counters.i++
     }
 
     if(e.target.matches('.button')){
@@ -344,6 +370,14 @@ manipulateContainer.addEventListener('click', (e) => {
         defaultMessage.textContent = 'Select or create a new project';
 
         whereToDos.append(defaultMessage);
+        
+        counters.listOfProjects = [];
+
+        const btnTitle = document.querySelectorAll('.btnTitle');
+
+        btnTitle.forEach(btn => {
+            counters.listOfProjects.push(btn.textContent)
+        })
 
     }
 
@@ -407,4 +441,43 @@ manipulateContainer.addEventListener('click', (e) => {
     }
     
     counters.j = 0;
+
+    localStorage.setItem('mySavesString', JSON.stringify(counters.listOfsaves));
+
+    localStorage.setItem('myProjectsString', JSON.stringify(counters.listOfProjects));
+
 })
+
+const mySavesObj = JSON.parse(localStorage.getItem('mySavesString'));
+
+const myProjectsArray = JSON.parse(localStorage.getItem('myProjectsString'));
+
+if (mySavesObj !== null) {
+    if (mySavesObj.length > 0) {
+        
+        for(let i = 0; i < mySavesObj.length; i++){
+            const storedProject = nameProjects()
+
+            page.projBody.append(storedProject.projBlock);
+
+            const btnTitle = document.querySelectorAll('.btnTitle');
+
+            for(let j = 0; j < btnTitle.length; j++){
+                btnTitle[j].textContent = myProjectsArray[j];
+            }
+            
+            const display = displayToDos();
+
+            counters.listOfDisplays.push(display);
+        }
+
+        page.passNumber('btnTitle', counters.j)
+        page.passNumber('projDel', counters.j)
+
+        counters.listOfsaves = mySavesObj;
+
+        counters.listOfProjects = myProjectsArray;
+    }
+} else {
+    console.log('Nothing');
+}
